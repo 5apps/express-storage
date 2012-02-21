@@ -1,0 +1,39 @@
+{
+  "name": "express-storage",
+  "description": "Light-weight remoteStorage provider",
+  "version": "0.1.0",
+  "homepage": "https://github.com/basti/express-storage",
+  "author": {
+    "name": "Sebastian Kippe, Garret Alfert",
+    "email": "unhosted@5apps.com",
+    "url": "http://5apps.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/5apps/express-storage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/5apps/express-storage/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/5apps/express-storage/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "express": "2.5.x",
+    "jade": "0.20.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.2.15"
+  },
+  "keywords": [],
+  "engines": {
+    "node": "0.6.x"
+  },
+  "main": "lib/express-storage",
+  "scripts": {
+    "test": "grunt test"
+  }
+}
