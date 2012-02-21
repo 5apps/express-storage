@@ -129,7 +129,7 @@ app.all('/:user/:category/:key', function(req, res){
 
 if (!module.parent) {
   app.listen(80);
-  console.log("Express server listening on port %d", app.address().port);
+  // console.log("Express server listening on port %d", app.address().port);
 
   storage.addUser('jimmy@localhost', '12345678', function() {
     console.log('created user jimmy@surf.unhosted.org with password 12345678');
