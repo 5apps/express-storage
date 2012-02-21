@@ -1,0 +1,28 @@
+!!! 5
+html(lang="en")
+  head
+    title OAuth
+    // link(href="/stylesheets/screen.css", media="screen, projection", rel="stylesheet", type="text/css")
+  body
+    #container
+      header
+        h1 Express Storage
+        h2 OAuth
+      #content
+
+  - if (redirectUri != undefined)
+    form(method="POST")
+      p
+        | UserId:
+        br
+        input(type="text", name="userId", value="#{userId}")
+      p
+        | Password:
+        br
+        input(type="password", name="password", value="")
+      input(type="hidden", name="redirectUri", value="#{redirectUri}")
+      input(type="hidden", name="scope", value="#{scope}")
+      input(type="submit", value="Allow")
+  - else
+    p
+      Please add ?redirect_uri=http://localhost/bla to the address
