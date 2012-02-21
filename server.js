@@ -38,7 +38,7 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/.well-known', function(req, res){
+app.get('/.well-known/host-meta', function(req, res){
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Content-Type', 'application/xrd+xml');
   res.send(webfinger.genHostMeta(config.origin));
@@ -68,9 +68,9 @@ app.get('/_oauth/:user', function(req, res){
 app.post(/^\/_oauth\/(?:(.+))/, function(req, res){
     var token = "yo-ho"; //TODO generate proper token
 
-    storage.createToken(req.param('userId'), req.param('password'), token, req.param('categories'), function(result) {
+    storage.createToken(req.param('userId'), req.param('password'), token, req.param('scope'), function(result) {
       if(result) {
-        res.redirect(redirectUri+'#access_token='+token);
+        res.redirect(req.param('redirectUri')+'#access_token='+token);
       } else {
         res.send("No, bro.", 401);
       }
@@ -98,13 +98,28 @@ app.all('/:user/:category/:key', function(req, res){
       userId: req.params.user,
       category: req.params.category,
       key: req.params.key,
-      value: req.body
+      value: ''
     };
-    console.log(reqObj);
 
-    doReq(reqObj, function(status_code, data) {
-      res.send(data, status_code);
-    });
+    if (req.method == "PUT") {
+      req.on('data', function(chunk) {
+        reqObj.value += chunk;
+      });
+      req.on('end', function() {
+        console.log(reqObj);
+
+        storage.doReq(reqObj, function(status_code, data) {
+          res.send(data, status_code);
+        });
+      });
+    }
+    else {
+      console.log(reqObj);
+
+      storage.doReq(reqObj, function(status_code, data) {
+        res.send(data, status_code);
+      });
+    }
   }
   catch (e) {
     res.send(e, 500);
@@ -113,10 +128,10 @@ app.all('/:user/:category/:key', function(req, res){
 });
 
 if (!module.parent) {
-  app.listen(4000);
+  app.listen(80);
   console.log("Express server listening on port %d", app.address().port);
 
-  storage.addUser('jimmy@surf.unhosted.org', '12345678', function() {
+  storage.addUser('jimmy@localhost', '12345678', function() {
     console.log('created user jimmy@surf.unhosted.org with password 12345678');
   });
 }
