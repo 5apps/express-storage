@@ -1,7 +1,7 @@
 {
   "name": "express-storage",
   "description": "Light-weight remoteStorage provider",
-  "version": "0.1.0-2",
+  "version": "0.1.0-4",
   "homepage": "https://github.com/basti/express-storage",
   "author": {
     "name": "Michiel de Jong, Sebastian Kippe, Garret Alfert",
