@@ -41,14 +41,14 @@ app.get('/', function(req, res){
 app.get('/.well-known/host-meta', function(req, res){
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Content-Type', 'application/xrd+xml');
-  res.send(webfinger.genHostMeta(config.origin));
+  res.send(webfinger.genHostMeta('http://'+config.host));
 });
 
 app.get(/^\/webfinger\/acct:(?:(.+))/, function(req, res){
   var userId = req.params[0];
   config.api = 'simple';
-  config.authUrl = config.origin+'/_oauth/'+userId;
-  config.template = config.origin+'/'+userId+'/{category}/';
+  config.authUrl = 'http://'+config.host+'/_oauth/'+userId;
+  config.template = 'http://'+config.host+'/'+userId+'/{category}/';
 
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Content-Type', 'application/xrd+xml');
@@ -128,10 +128,11 @@ app.all('/:user/:category/:key', function(req, res){
 });
 
 if (!module.parent) {
-  app.listen(80);
-  // console.log("Express server listening on port %d", app.address().port);
+  app.listen(config.port);
+  console.log("Express server listening on port %d", config.port);
+  console.log(util.inspect(config));
 
-  storage.addUser('jimmy@localhost', '12345678', function() {
+  storage.addUser('jimmy@'+config.host, '12345678', function() {
     console.log('created user jimmy@surf.unhosted.org with password 12345678');
   });
 }
