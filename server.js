@@ -132,5 +132,5 @@ if (!module.parent) {
   console.log("Express server listening on port %d", config.port);
   console.log(util.inspect(config));
 
-  storage.addUser('jimmy@'+config.host, '12345678');
+  storage.addUser('jimmy@'+config.host, '12345678', function(){});
 }
