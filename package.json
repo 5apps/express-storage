@@ -35,6 +35,8 @@
   },
   "main": "lib/express-storage",
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt test",
+    "start": "server.js"
+  },
+  "subdomain": "express-storage"
 }
