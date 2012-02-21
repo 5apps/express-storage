@@ -1,14 +1,9 @@
-# express-storage
+# ExpressStorage
 
-Light-weight remoteStorage provider
+A ligthweight, hacky proof-of-concept Unhosted storage provider, based on Node.js and Redis
 
 ## Getting Started
-Install the module with: `npm install express-storage`
-
-```javascript
-var express_storage = require('express-storage');
-express_storage.awesome(); // "awesome"
-```
+_(Coming soon)_
 
 ## Documentation
 _(Coming soon)_
@@ -17,11 +12,11 @@ _(Coming soon)_
 _(Coming soon)_
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
+_(Coming soon)_
 
 ## Release History
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2012 Sebastian Kippe, Garret Alfert  
+Copyright (c) 2012 Michiel De Jong, Sebastian Kippe, Garret Alfert
 Licensed under the MIT license.
