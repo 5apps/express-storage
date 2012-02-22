@@ -14,12 +14,12 @@ var app = module.exports = express.createServer();
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-	app.set('view options', {layout: false});
+  app.set('view options', {layout: false});
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-	app.use('/', express.errorHandler({ dump: true, stack: true }));
+  app.use('/', express.errorHandler({ dump: true, stack: true }));
 });
 
 app.configure('development', function(){
@@ -66,7 +66,7 @@ app.get('/_oauth/:user', function(req, res){
 });
 
 app.post(/^\/_oauth\/(?:(.+))/, function(req, res){
-    var token = "yo-ho"; //TODO generate proper token
+    var token = storage.generateToken();
 
     storage.createToken(req.param('userId'), req.param('password'), token, req.param('scope'), function(result) {
       if(result) {
