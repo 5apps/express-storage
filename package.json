@@ -1,7 +1,7 @@
 {
   "name": "express-storage",
   "description": "Light-weight remoteStorage provider",
-  "version": "0.1.0-9",
+  "version": "0.1.0-12",
   "homepage": "https://github.com/5apps/express-storage",
   "author": {
     "name": "Michiel de Jong, Sebastian Kippe, Garret Alfert",

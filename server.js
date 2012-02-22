@@ -77,6 +77,11 @@ app.post(/^\/_oauth\/(?:(.+))/, function(req, res){
     });
 });
 
+app.get("/create_test_user", function(req, res){
+  storage.addUser('jimmy@'+config.host, '12345678', function(){});
+  res.send("User created");
+});
+
 app.options('*', function(req, res){
   res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Access-Control-Allow-Methods', 'GET, PUT, DELETE');
@@ -130,7 +135,15 @@ app.all('/:user/:category/:key', function(req, res){
 if (!module.parent) {
   app.listen(config.port);
   console.log("Express server listening on port %d", config.port);
-  console.log(util.inspect(config));
+  // console.log("Config:");
+  // console.log(util.inspect(config));
+}
 
-  storage.addUser('jimmy@'+config.host, '12345678', function(){});
+// REPL
+if (process.argv[2] == "repl") {
+  var repl = require("repl");
+  var context = repl.start("$ ").context;
+  context.util = require('util');
+  context.config = require('./config.js').config;
+  context.storage = require('./lib/express-storage.js').storage;
 }
